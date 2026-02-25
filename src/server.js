@@ -23,6 +23,12 @@ app.use('/api/v1/blogs-mela/auth', userRoutes);
 app.use('/api/v1/blogs-mela', blogRoutes);
 app.use('/api/v1/blogs-mela', contactRoutes);
 
-app.listen(PORT, () => {
-  console.log(`✅ Server is running on port ${PORT}`);
-});
+// ✅ FOR VERCEL: Export the app (do NOT call app.listen())
+export default app;
+
+// ✅ FOR LOCAL DEVELOPMENT: Conditionally start the server
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`✅ Server is running on port ${PORT}`);
+  });
+}
